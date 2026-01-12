@@ -28,6 +28,8 @@ class SynthCoreOrchestrator:
         self.memory = memory_service
         self.assembler = assembler
         self.llm = llm_client
+        # Initialize Mood engine with defaults for Phase 1
+        self.mood_engine = MoodDecayEngine()
         self.baseline_mood = MoodDecayEngine.BASELINE
 
     async def process_turn(
@@ -55,7 +57,8 @@ class SynthCoreOrchestrator:
         # 2. Load and Decay Mood (100ms timeout)
         try:
             raw_mood = mood_current or await asyncio.wait_for(self._load_mood(user_id), timeout=0.1)
-            mood = MoodDecayEngine.apply_decay(raw_mood, datetime.now(timezone.utc))
+            # Use the instance method for decay calculation
+            mood = self.mood_engine.apply_decay(raw_mood, datetime.now(timezone.utc))
         except Exception as e:
             logger.warning(f"Mood load failure: {e}")
             mood = self.baseline_mood
