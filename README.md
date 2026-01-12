@@ -1,3 +1,5 @@
+[![Version](https://img.shields.io/badge/version-0.1.0-blue)](#) [![Python](https://img.shields.io/badge/python-3.10%2B-blue?logo=python)](https://www.python.org/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 # SynthCore
 
 **SynthCore** is the orchestration engine at the heart of the Nexus Client architecture.  
